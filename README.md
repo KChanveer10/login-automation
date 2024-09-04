@@ -1,9 +1,9 @@
-### **Overview:**
-- **Bookmarklet.js:** Automates the login process by filling in the username and CAPTCHA, clicking the "Next" button, retrieving the OTP from a Google Apps Script web app, and completing the login.
+### **TCS NextStep Login automation for TCSer:**
+- **Bookmarklet.js:** Automates the TCS NextStep login process by filling in the username and CAPTCHA, clicking the "Next" button, retrieving the OTP from a Google Apps Script web app, and completing the login.
 - **Code.gs:** A Google Apps Script that fetches the OTP from your Gmail and returns it in JSON format.
 
 ### **Disclaimer:**
-**The Gmail account used in the login username and the Gmail account used to create the Google Apps Script web app must be the same.** This is essential for the script to correctly fetch the OTP from your Gmail.
+**The Gmail account used in the TCS NextStep login username and the Gmail account used to create the Google Apps Script web app must be the same.** This is essential for the script to correctly fetch the OTP from your Gmail.
 
 ### **Implementation Steps:**
 

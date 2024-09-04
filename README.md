@@ -49,7 +49,7 @@
 #### **Step 4: Use the Bookmarklet**
 
 1. **Navigate to the Login Page:**
-   - Go to the [TCS NextStep](https://nextstep.tcs.com/campus/#/).
+   - Go to the [TCS NextStep](https://nextstep.tcs.com/campus/#/) and click on the Login.
 
 2. **Execute the Bookmarklet:**
    - Click the bookmark you created.

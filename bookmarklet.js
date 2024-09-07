@@ -31,7 +31,7 @@ javascript:(function(){
 
     async function main() {
         var emailInput = document.querySelector('#inputdefault');
-        emailInput.value = '<Email or Username>';
+        emailInput.value = '<Email or Ref ID>';
         triggerEvent(emailInput, 'input');
         triggerEvent(emailInput, 'keyup');
 

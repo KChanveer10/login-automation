@@ -27,7 +27,7 @@
 
 1. **Edit Bookmarklet Code:**
    - Open `bookmarklet.js`.
-   - Replace `'<Your App Script Web App URL>'` with the URL you copied from the Google Apps Script deployment.
+   - Replace `'<Your Google App Script Web App URL>'` with the URL you copied from the Google Apps Script deployment.
 
 2. **Prepare for Bookmarking:**
    - Ensure the script is a single line of code without comments or extra whitespace.

@@ -1,18 +1,25 @@
-javascript:(function(){
+javascript:(function() {
+    const email = '<Your Email-ID>';
+    const scriptUrl = '<Your Google Apps Script Web URL>';
+
+    // Helper function to trigger an event
     function triggerEvent(el, eventType) {
-        var event = new Event(eventType, { bubbles: true, cancelable: true });
+        const event = new Event(eventType, { bubbles: true, cancelable: true });
         el.dispatchEvent(event);
     }
 
+    // Helper function to simulate a click
     function simulateClick(el) {
-        var event = new MouseEvent('click', { bubbles: true, cancelable: true, view: window });
+        const event = new MouseEvent('click', { bubbles: true, cancelable: true, view: window });
         el.dispatchEvent(event);
     }
 
+    // Helper function to wait for a specific time
     function wait(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    // Helper function to wait for an element in the DOM
     function waitForElement(selector, timeout = 10000) {
         return new Promise((resolve, reject) => {
             const start = Date.now();
@@ -29,50 +36,59 @@ javascript:(function(){
         });
     }
 
+    // Main automation process
     async function main() {
-        var emailInput = document.querySelector('#inputdefault');
-        emailInput.value = '<Email or Ref ID>';
-        triggerEvent(emailInput, 'input');
-        triggerEvent(emailInput, 'keyup');
-
-        var captchaInput = document.querySelector('#userCaptcha');
-        var captchaText = document.querySelector('label.control-label.input-sm.ng-binding').textContent.trim();
-        captchaInput.value = captchaText;
-        triggerEvent(captchaInput, 'input');
-        triggerEvent(captchaInput, 'keyup');
-
         try {
-            console.log('Looking for the Next button...');
-            var nextButton = await waitForElement("#loginForm > div:nth-child(7) > button:nth-child(1)");
-            console.log('Next button found:', nextButton);
+            // Step 1: Click the login button
+            const loginButton = await waitForElement('#mainDivision > div > div > section.bodyBgc > div.header > div > div.menuGrid > table > tbody > tr > td:nth-child(5) > a');
+            simulateClick(loginButton);
+            await wait(5000);
+
+            // Step 2: Fill the email
+            const emailInput = document.querySelector('#inputdefault');
+            if (emailInput) {
+                emailInput.value = email;
+                triggerEvent(emailInput, 'input');
+                triggerEvent(emailInput, 'keyup');
+            }
+
+            // Step 3: Fill the CAPTCHA
+            const captchaInput = document.querySelector('#userCaptcha');
+            const captchaText = document.querySelector('label.control-label.input-sm.ng-binding')?.textContent.trim();
+            if (captchaInput && captchaText) {
+                captchaInput.value = captchaText;
+                triggerEvent(captchaInput, 'input');
+                triggerEvent(captchaInput, 'keyup');
+            }
+
+            // Step 4: Click the next button
+            const nextButton = await waitForElement('#loginForm > div:nth-child(7) > button:nth-child(1)');
             simulateClick(nextButton);
-        } catch (error) {
-            console.error('Next button not found or failed to click:', error);
-            return;
-        }
+            await wait(10000);
 
-        await wait(10000);
+            // Step 5: Fetch OTP from the script
+            const response = await fetch(scriptUrl);
+            const data = await response.json();
+            const otp = data.otp.trim();
 
-        try {
-            var response = await fetch('<Your App Script Web App Url>');
-            var data = await response.json();
-            var otp = data.otp.trim();
+            // Step 6: Fill the OTP
+            const otpInput = document.querySelector('#loginOtp');
+            if (otpInput) {
+                otpInput.value = otp;
+                triggerEvent(otpInput, 'input');
+                triggerEvent(otpInput, 'keyup');
+            }
 
-            var otpInput = document.querySelector('#loginOtp');
-            otpInput.value = otp;
-            triggerEvent(otpInput, 'input');
-            triggerEvent(otpInput, 'keyup');
-
-            var loginButton = document.querySelector('#verifyLoginOTPBtn');
-            if (loginButton) {
-                simulateClick(loginButton);
-            } else {
-                console.error('Login button not found.');
+            // Step 7: Submit the OTP
+            const submitButton = document.querySelector('#verifyLoginOTPBtn');
+            if (submitButton) {
+                simulateClick(submitButton);
             }
         } catch (error) {
-            console.error('Failed to fetch OTP or login:', error);
+            console.error('Error during the automation process:', error);
         }
     }
 
+    // Execute the main function
     main();
 })();

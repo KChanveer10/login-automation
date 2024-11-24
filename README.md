@@ -49,11 +49,11 @@
 #### **Step 4: Use the Bookmarklet**
 
 1. **Navigate to the Login Page:**
-   - Go to the [TCS NextStep](https://nextstep.tcs.com/campus/#/) and click on the Login.
+   - Go to the [TCS NextStep](https://nextstep.tcs.com/campus/#/).
 
 2. **Execute the Bookmarklet:**
    - Click the bookmark you created.
-   - The script will run, filling in the login details, retrieving the OTP via Google Apps Script, and completing the login.
+   - The script will run, clicking on the login button, filling in the login details, retrieving the OTP via Google Apps Script, and completing the login.
 
 ### **Summary:**
 - **Bookmarklet.js:** Automates the login process.
